@@ -15,30 +15,22 @@ const {
  *      Users:
  *        type: object
  *        properties:
- *            nome:
- *              type: string
- *              description: Informe o nome
- *              example: felipe
- *            idade:
- *              type: string
- *              description: Informe a idade
- *              example: 20
- *            nota_do_primeiro_semestre:
- *              type: string
- *              description: Informe a nota do primeiro semestre
- *              example: 10
- *            nota_do_segundo_semestre:
- *              type: string
- *              description: Informe a nota do segundo semestre
- *              example: 10
- *            nome_do_professor:
- *              type: string
- *              description: Informe o nome do professor
- *              example: Arthur Severo
- *            numero_da_sala:
- *              type: string
- *              description: Informe o nome do professor
- *              example: 243
+ *          nome:
+ *            type: string
+ *            description: Informe o nome
+ *            example: felipe
+ *          email:
+ *            type: string
+ *            description: Informe o Email
+ *            example: felipealves@gmail.com
+ *          foto:
+ *            type: string
+ *            description: Insira sua foto (Opcional)
+ *            example: placeholderValue
+ *          postagem:
+ *            type: string
+ *            description: Informe a postagem
+ *            example: 10/10/2010
  */
 
 /**
@@ -46,12 +38,12 @@ const {
  * /api/users:
  *  get:
  *    tags:
- *      - Students
- *    summary: Busca todos os estudantes
- *    description: Busca todos os estudantes
+ *      - Usuario
+ *    summary: Busca todos os usuários
+ *    description: Busca todos os usuários
  *    responses:
  *      200:
- *        description: Lista de todos estudantes
+ *        description: Lista de todos usuários
  *        content:
  *          application/json:
  *            schema:
@@ -72,20 +64,20 @@ routes.get("/", findAllUsers);
  * /api/users/{id}:
  *    get:
  *      tags:
- *        - Students
- *      summary: Busca estudante pela ID
- *      description: Busca estudante pela ID
+ *        - Usuario
+ *      summary: Busca usuário pela ID
+ *      description: Busca usuário pela ID
  *      parameters:
  *        - name: id
  *          in: path
  *          required: true
- *          description: id do estudante
+ *          description: id do usuário
  *          schema:
  *            type: integer
  *            format: int64
  *      responses:
  *        200:
- *          description: dados do estudante
+ *          description: dados do usuário
  *          content:
  *            application/json:
  *              schema:
@@ -101,26 +93,18 @@ routes.get("/", findAllUsers);
  *                        type: string
  *                        description: Informe o nome
  *                        example: felipe
- *                      idade:
+ *                      email:
  *                        type: string
- *                        description: Informe a idade
- *                        example: 20
- *                      nota_do_primeiro_semestre:
+ *                        description: Informe o Email
+ *                        example: felipealves@gmail.com
+ *                      foto:
  *                        type: string
- *                        description: Informe a nota do primeiro semestre
- *                        example: 10
- *                      nota_do_segundo_semestre:
+ *                        description: Insira sua foto (Opcional)
+ *                        example: placeholderValue
+ *                      postagem:
  *                        type: string
- *                        description: Informe a nota do segundo semestre
- *                        example: 10
- *                      nome_do_professor:
- *                        type: string
- *                        description: Informe o nome do professor
- *                        example: Arthur Severo
- *                      numero_da_sala:
- *                        type: string
- *                        description: Informe o nome do professor
- *                        example: 243
+ *                        description: Informe a postagem
+ *                        example: 10/10/2010
  *
  */
 routes.get("/:id", findtUsersById);
@@ -130,9 +114,9 @@ routes.get("/:id", findtUsersById);
  * /api/users/:
  *    post:
  *      tags:
- *        - Students
- *      description: Cria estudantes na API
- *      summary: Cria os dados dos estudantes
+ *        - Usuario
+ *      description: Cria um usuário na API
+ *      summary: Cria os dados dos usuários
  *      requestBody:
  *        required: true
  *        content:
@@ -144,26 +128,18 @@ routes.get("/:id", findtUsersById);
  *                  type: string
  *                  description: Informe o nome
  *                  example: felipe
- *                idade:
+ *                email:
  *                  type: string
- *                  description: Informe a idade
- *                  example: 20
- *                nota_do_primeiro_semestre:
+ *                  description: Informe o Email
+ *                  example: felipealves@gmail.com
+ *                foto:
  *                  type: string
- *                  description: Informe a nota do primeiro semestre
- *                  example: 10
- *                nota_do_segundo_semestre:
+ *                  description: Insira sua foto (Opcional)
+ *                  example: placeholderValue
+ *                postagem:
  *                  type: string
- *                  description: Informe a nota do segundo semestre
- *                  example: 10
- *                nome_do_professor:
- *                  type: string
- *                  description: Informe o nome do professor
- *                  example: Arthur Severo
- *                numero_da_sala:
- *                  type: string
- *                  description: Informe o nome do professor
- *                  example: 243
+ *                  description: Informe a postagem
+ *                  example: 10/10/2010
  *      responses:
  *        200:
  *          description: Successfully created data
@@ -184,14 +160,14 @@ routes.post("/", createUsers);
  * /api/users/{id}:
  *    delete:
  *      tags:
- *        - Students
- *      summary: Remover um estudante
- *      description: Remover um estudante
+ *        - Usuario
+ *      summary: Remover um usuário
+ *      description: Remover um usuário
  *      parameters:
  *        - name: id
  *          in: path
  *          required: true
- *          description: Estudante ID
+ *          description: usuário ID
  *          schema:
  *            type: integer
  *            format: int64
@@ -216,9 +192,9 @@ routes.delete("/:id", removeUsers);
  * /api/users/{id}:
  *    put:
  *      tags:
- *        - Students
- *      summary: Atualiza dados dos alunos
- *      description: Atualiza dados dos alunos
+ *        - Usuario
+ *      summary: Atualiza dados dos usuário
+ *      description: Atualiza dados dos usuário
  *      parameters:
  *        - name: id
  *          in: path
@@ -238,26 +214,18 @@ routes.delete("/:id", removeUsers);
  *                  type: string
  *                  description: Informe o nome
  *                  example: felipe
- *                idade:
+ *                email:
  *                  type: string
- *                  description: Informe a idade
- *                  example: 20
- *                nota_do_primeiro_semestre:
+ *                  description: Informe o Email
+ *                  example: felipealves@gmail.com
+ *                foto:
  *                  type: string
- *                  description: Informe a nota do primeiro semestre
- *                  example: 10
- *                nota_do_segundo_semestre:
+ *                  description: Insira sua foto (Opcional)
+ *                  example: placeholderValue
+ *                postagem:
  *                  type: string
- *                  description: Informe a nota do segundo semestre
- *                  example: 10
- *                nome_do_professor:
- *                  type: string
- *                  description: Informe o nome do professor
- *                  example: Arthur Severo
- *                numero_da_sala:
- *                  type: string
- *                  description: Informe o nome do professor
- *                  example: 243
+ *                  description: Informe a postagem
+ *                  example: 10/10/2010
  *      responses:
  *        200:
  *          description: Successfully updated data

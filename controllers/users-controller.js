@@ -1,11 +1,12 @@
 const AsyncHandler = require("express-async-handler");
 const Users = require("../model/users");
+const Posts = require("../model/posts");
 
 const findAllUsers = AsyncHandler(async (req, res) => {
   const usersList = await Users.findAll();
 
   res.status(200).json({
-    description: "Successsfully fetched users data!",
+    description: "Successfully fetched users data!",
     data: usersList,
   });
 });
@@ -16,24 +17,17 @@ const createUsers = AsyncHandler(async (req, res) => {
       description: "O nome precisa estar preenchido",
     });
   }
-  if (!req.body.idade) {
+  if (!req.body.email) {
     res.status(400).json({
-      description: "A idade precisa estar preenchida",
-    });
-  }
-  if (!req.body.numero_da_sala) {
-    res.status(400).json({
-      description: "O numero da sala precisa estar preenchido",
+      description: "O Email precisa estar preenchida",
     });
   }
 
   const users_map = {
     nome: req.body.nome,
-    idade: req.body.idade,
-    nota_do_primeiro_semestre: req.body.nota_do_primeiro_semestre,
-    nota_do_segundo_semestre: req.body.nota_do_segundo_semestre,
-    nome_do_professor: req.body.nome_do_professor,
-    numero_da_sala: req.body.numero_da_sala,
+    email: req.body.email,
+    foto: req.body.foto,
+    postagem: req.body.postagem,
   };
 
   const users = await Users.create(users_map);

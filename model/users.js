@@ -2,17 +2,15 @@ const Sequelize = require("sequelize");
 const db = require("../config/config");
 
 const users = db.define(
-  "students",
+  "Usuario",
   {
     nome: Sequelize.STRING,
-    idade: Sequelize.STRING,
-    nota_do_primeiro_semestre: Sequelize.STRING,
-    nota_do_segundo_semestre: Sequelize.STRING,
-    nome_do_professor: Sequelize.STRING,
-    numero_da_sala: Sequelize.STRING,
+    email: Sequelize.STRING,
+    foto: Sequelize.STRING,
+    postagem: Sequelize.STRING,
   },
   {
-    tableName: "students",
+    tableName: "Usuario",
     timestamps: true,
   }
 );
