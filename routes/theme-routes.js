@@ -1,32 +1,24 @@
 const Express = require("express");
 const routes = Express.Router();
 const {
-  createUsers,
-  findAllUsers,
-  findtUsersById,
-  updateUsers,
-  removeUsers,
-} = require("../controllers/users-controller");
+  createTheme,
+  findAllThemes,
+  findtThemeById,
+  updateTheme,
+  removeTheme,
+} = require("../controllers/themes-controller");
 
 /**
  *  @swagger
  *  components:
  *    schemas:
- *      Users:
+ *      Themes:
  *        type: object
  *        properties:
- *          nome:
+ *          descricao:
  *            type: string
- *            description: Informe o nome
- *            example: felipe
- *          email:
- *            type: string
- *            description: Informe o Email
- *            example: felipealves@gmail.com
- *          foto:
- *            type: string
- *            description: Insira sua foto (Opcional)
- *            example: placeholderValue
+ *            description: Informe a descricao
+ *            example: descrição de exemplo
  *          postagem:
  *            type: string
  *            description: Informe a postagem
@@ -35,15 +27,15 @@ const {
 
 /**
  * @swagger
- * /api/users:
+ * /api/theme:
  *  get:
  *    tags:
- *      - Usuario
- *    summary: Busca todos os usuários
- *    description: Busca todos os usuários
+ *      - Temas
+ *    summary: Busca todos os Temas
+ *    description: Busca todos os Temas
  *    responses:
  *      200:
- *        description: Lista de todos usuários
+ *        description: Lista de todos Temas
  *        content:
  *          application/json:
  *            schema:
@@ -58,27 +50,27 @@ const {
  *                    $ref: '#/components/schemas/Users'
  *
  */
-routes.get("/", findAllUsers);
+routes.get("/", findAllThemes);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/theme/{id}:
  *    get:
  *      tags:
- *        - Usuario
- *      summary: Busca usuário pela ID
- *      description: Busca usuário pela ID
+ *        - Temas
+ *      summary: Busca Tema pela ID
+ *      description: Busca Tema pela ID
  *      parameters:
  *        - name: id
  *          in: path
  *          required: true
- *          description: id do usuário
+ *          description: id do Tema
  *          schema:
  *            type: integer
  *            format: int64
  *      responses:
  *        200:
- *          description: dados do usuário
+ *          description: dados do Tema
  *          content:
  *            application/json:
  *              schema:
@@ -90,34 +82,26 @@ routes.get("/", findAllUsers);
  *                  data:
  *                    type: object
  *                    properties:
- *                      nome:
+ *                      descricao:
  *                        type: string
- *                        description: Informe o nome
- *                        example: felipe
- *                      email:
- *                        type: string
- *                        description: Informe o Email
- *                        example: felipealves@gmail.com
- *                      foto:
- *                        type: string
- *                        description: Insira sua foto (Opcional)
- *                        example: placeholderValue
+ *                        description: Informe a descricao
+ *                        example: Descrição de exemplo
  *                      postagem:
  *                        type: string
  *                        description: Informe a postagem
  *                        example: 10/10/2010
  *
  */
-routes.get("/:id", findtUsersById);
+routes.get("/:id", findtThemeById);
 
 /**
  * @swagger
- * /api/users/:
+ * /api/theme/:
  *    post:
  *      tags:
- *        - Usuario
- *      description: Cria um usuário na API
- *      summary: Cria os dados dos usuários
+ *        - Temas
+ *      description: Cria um Tema na API
+ *      summary: Cria os dados dos Temas
  *      requestBody:
  *        required: true
  *        content:
@@ -125,18 +109,10 @@ routes.get("/:id", findtUsersById);
  *            schema:
  *              type: object
  *              properties:
- *                nome:
+ *                descricao:
  *                  type: string
- *                  description: Informe o nome
- *                  example: felipe
- *                email:
- *                  type: string
- *                  description: Informe o Email
- *                  example: felipealves@gmail.com
- *                foto:
- *                  type: string
- *                  description: Insira sua foto (Opcional)
- *                  example: placeholderValue
+ *                  description: Informe a descricao
+ *                  example: descrição de exemplo
  *                postagem:
  *                  type: string
  *                  description: Informe a postagem
@@ -154,21 +130,21 @@ routes.get("/:id", findtUsersById);
  *                    example: Successfully created data!
  *
  */
-routes.post("/", createUsers);
+routes.post("/", createTheme);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/theme/{id}:
  *    delete:
  *      tags:
- *        - Usuario
- *      summary: Remover um usuário
- *      description: Remover um usuário
+ *        - Temas
+ *      summary: Remover um Tema
+ *      description: Remover um Tema
  *      parameters:
  *        - name: id
  *          in: path
  *          required: true
- *          description: usuário ID
+ *          description: Tema ID
  *          schema:
  *            type: integer
  *            format: int64
@@ -186,21 +162,21 @@ routes.post("/", createUsers);
  *
  *
  */
-routes.delete("/:id", removeUsers);
+routes.delete("/:id", removeTheme);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/theme/{id}:
  *    put:
  *      tags:
- *        - Usuario
- *      summary: Atualiza dados dos usuário
- *      description: Atualiza dados dos usuário
+ *        - Temas
+ *      summary: Atualiza dados dos Tema
+ *      description: Atualiza dados dos Tema
  *      parameters:
  *        - name: id
  *          in: path
  *          required: true
- *          description: Users id
+ *          description: Theme id
  *          schema:
  *            type: integer
  *            format: int64
@@ -211,18 +187,10 @@ routes.delete("/:id", removeUsers);
  *            schema:
  *              type: object
  *              properties:
- *                nome:
+ *                descricao:
  *                  type: string
- *                  description: Informe o nome
- *                  example: felipe
- *                email:
- *                  type: string
- *                  description: Informe o Email
- *                  example: felipealves@gmail.com
- *                foto:
- *                  type: string
- *                  description: Insira sua foto (Opcional)
- *                  example: placeholderValue
+ *                  description: Informe a descricao
+ *                  example: Descrição de exemplo
  *                postagem:
  *                  type: string
  *                  description: Informe a postagem
@@ -241,6 +209,6 @@ routes.delete("/:id", removeUsers);
  *
  *
  */
-routes.put("/:id", updateUsers);
+routes.put("/:id", updateTheme);
 
 module.exports = routes;

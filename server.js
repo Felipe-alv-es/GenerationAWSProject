@@ -45,6 +45,8 @@ db.sync()
 
 // rout
 app.use("/api/users", require("./routes/users-routes"));
+app.use("/api/posts", require("./routes/posts-routes"));
+app.use("/api/theme", require("./routes/theme-routes"));
 
 // global error handler
 app.use(errorHandler);

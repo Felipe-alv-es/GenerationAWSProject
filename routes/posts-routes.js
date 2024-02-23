@@ -1,12 +1,12 @@
 const Express = require("express");
 const routes = Express.Router();
 const {
-  createUsers,
-  findAllUsers,
-  findtUsersById,
-  updateUsers,
-  removeUsers,
-} = require("../controllers/users-controller");
+  createPosts,
+  findAllPosts,
+  findPostById,
+  updatePosts,
+  removePosts,
+} = require("../controllers/posts-controller");
 
 /**
  *  @swagger
@@ -35,15 +35,15 @@ const {
 
 /**
  * @swagger
- * /api/users:
+ * /api/posts:
  *  get:
  *    tags:
- *      - Usuario
- *    summary: Busca todos os usuários
- *    description: Busca todos os usuários
+ *      - Postagem
+ *    summary: Busca todas as postagens
+ *    description: Busca todas as postagens
  *    responses:
  *      200:
- *        description: Lista de todos usuários
+ *        description: Lista de todas postagens
  *        content:
  *          application/json:
  *            schema:
@@ -58,27 +58,27 @@ const {
  *                    $ref: '#/components/schemas/Users'
  *
  */
-routes.get("/", findAllUsers);
+routes.get("/", findAllPosts);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/posts/{id}:
  *    get:
  *      tags:
- *        - Usuario
- *      summary: Busca usuário pela ID
- *      description: Busca usuário pela ID
+ *        - Postagem
+ *      summary: Busca post pela ID
+ *      description: Busca post pela ID
  *      parameters:
  *        - name: id
  *          in: path
  *          required: true
- *          description: id do usuário
+ *          description: id do post
  *          schema:
  *            type: integer
  *            format: int64
  *      responses:
  *        200:
- *          description: dados do usuário
+ *          description: dados do post
  *          content:
  *            application/json:
  *              schema:
@@ -108,16 +108,16 @@ routes.get("/", findAllUsers);
  *                        example: 10/10/2010
  *
  */
-routes.get("/:id", findtUsersById);
+routes.get("/:id", findPostById);
 
 /**
  * @swagger
- * /api/users/:
+ * /api/posts/:
  *    post:
  *      tags:
- *        - Usuario
- *      description: Cria um usuário na API
- *      summary: Cria os dados dos usuários
+ *        - Postagem
+ *      description: Cria uma postagem na API
+ *      summary: Criar uma postagem
  *      requestBody:
  *        required: true
  *        content:
@@ -125,21 +125,21 @@ routes.get("/:id", findtUsersById);
  *            schema:
  *              type: object
  *              properties:
- *                nome:
+ *                titulo:
  *                  type: string
- *                  description: Informe o nome
- *                  example: felipe
- *                email:
+ *                  description: Informe o Titulo
+ *                  example: Titulo generico ponto png
+ *                texto:
  *                  type: string
- *                  description: Informe o Email
- *                  example: felipealves@gmail.com
- *                foto:
+ *                  description: Informe o Texto
+ *                  example: texto generico ponto jpg
+ *                usuario:
  *                  type: string
- *                  description: Insira sua foto (Opcional)
- *                  example: placeholderValue
- *                postagem:
+ *                  description: Insira o usuário
+ *                  example: Fulano
+ *                tema:
  *                  type: string
- *                  description: Informe a postagem
+ *                  description: Informe o tema
  *                  example: 10/10/2010
  *      responses:
  *        200:
@@ -154,21 +154,21 @@ routes.get("/:id", findtUsersById);
  *                    example: Successfully created data!
  *
  */
-routes.post("/", createUsers);
+routes.post("/", createPosts);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/posts/{id}:
  *    delete:
  *      tags:
- *        - Usuario
- *      summary: Remover um usuário
- *      description: Remover um usuário
+ *        - Postagem
+ *      summary: Remover um post
+ *      description: Remover um post
  *      parameters:
  *        - name: id
  *          in: path
  *          required: true
- *          description: usuário ID
+ *          description: post ID
  *          schema:
  *            type: integer
  *            format: int64
@@ -186,21 +186,21 @@ routes.post("/", createUsers);
  *
  *
  */
-routes.delete("/:id", removeUsers);
+routes.delete("/:id", removePosts);
 
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/posts/{id}:
  *    put:
  *      tags:
- *        - Usuario
- *      summary: Atualiza dados dos usuário
- *      description: Atualiza dados dos usuário
+ *        - Postagem
+ *      summary: Atualiza dados do post
+ *      description: Atualiza dados do post
  *      parameters:
  *        - name: id
  *          in: path
  *          required: true
- *          description: Users id
+ *          description: Post id
  *          schema:
  *            type: integer
  *            format: int64
@@ -211,21 +211,21 @@ routes.delete("/:id", removeUsers);
  *            schema:
  *              type: object
  *              properties:
- *                nome:
+ *                titulo:
  *                  type: string
- *                  description: Informe o nome
- *                  example: felipe
- *                email:
+ *                  description: Informe o Titulo
+ *                  example: Titulo generico ponto png
+ *                texto:
  *                  type: string
- *                  description: Informe o Email
- *                  example: felipealves@gmail.com
- *                foto:
+ *                  description: Informe o Texto
+ *                  example: texto generico ponto jpg
+ *                usuario:
  *                  type: string
- *                  description: Insira sua foto (Opcional)
- *                  example: placeholderValue
- *                postagem:
+ *                  description: Insira o usuário
+ *                  example: Fulano
+ *                tema:
  *                  type: string
- *                  description: Informe a postagem
+ *                  description: Informe o tema
  *                  example: 10/10/2010
  *      responses:
  *        200:
@@ -241,6 +241,6 @@ routes.delete("/:id", removeUsers);
  *
  *
  */
-routes.put("/:id", updateUsers);
+routes.put("/:id", updatePosts);
 
 module.exports = routes;
