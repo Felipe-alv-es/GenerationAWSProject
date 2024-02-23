@@ -5,8 +5,16 @@ const findAllPosts = AsyncHandler(async (req, res) => {
   const Posts = await Posts.findAll();
 
   res.status(200).json({
-    description: "Successfully fetched users data!",
+    description: "Successfully fetched post data!",
     data: usersList,
+  });
+});
+
+const findPostById = AsyncHandler(async (req, res) => {
+  const post = await Posts.findByPk(req.params.id);
+  res.status(200).json({
+    description: `Successfully fetch by id: ${req.params.id} post data!`,
+    data: post,
   });
 });
 
@@ -33,11 +41,33 @@ const createPosts = AsyncHandler(async (req, res) => {
   const posts = await Posts.create(posts_map);
 
   res.status(200).json({
-    description: "Successfully saved user data!",
+    description: "Successfully saved post data!",
+  });
+});
+
+const updatePosts = AsyncHandler(async (req, res) => {
+  const post = await Posts.update(req.body, {
+    where: { id: req.params.id },
+  });
+
+  res.status(200).json({
+    description: `Post alterado!`,
+  });
+});
+
+const removePosts = AsyncHandler(async (req, res) => {
+  const post = await Posts.destroy({
+    where: { id: req.params.id },
+  });
+  res.status(200).json({
+    description: `Successfully deleted post data!`,
   });
 });
 
 module.exports = {
   findAllPosts,
   createPosts,
+  findPostById,
+  updatePosts,
+  removePosts,
 };

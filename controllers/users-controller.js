@@ -11,6 +11,14 @@ const findAllUsers = AsyncHandler(async (req, res) => {
   });
 });
 
+const findtUsersById = AsyncHandler(async (req, res) => {
+  const user = await Users.findByPk(req.params.id);
+  res.status(200).json({
+    description: `Successfully fetch by id: ${req.params.id} user data!`,
+    data: user,
+  });
+});
+
 const createUsers = AsyncHandler(async (req, res) => {
   if (!req.body.nome) {
     res.status(400).json({
@@ -34,14 +42,6 @@ const createUsers = AsyncHandler(async (req, res) => {
 
   res.status(200).json({
     description: "Successfully saved user data!",
-  });
-});
-
-const findtUsersById = AsyncHandler(async (req, res) => {
-  const user = await Users.findByPk(req.params.id);
-  res.status(200).json({
-    description: `Successfully fetch by id: ${req.params.id} user data!`,
-    data: user,
   });
 });
 

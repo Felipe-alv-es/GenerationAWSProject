@@ -59,6 +59,7 @@ const {
  *
  */
 routes.get("/", findAllUsers);
+
 /**
  * @swagger
  * /api/users/{id}:
