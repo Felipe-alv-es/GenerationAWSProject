@@ -1,5 +1,6 @@
 const AsyncHandler = require("express-async-handler");
 const Posts = require("../model/posts");
+const User = require("../model/users");
 
 const findAllPosts = AsyncHandler(async (req, res) => {
   const Posts = await Posts.findAll();
@@ -30,19 +31,40 @@ const createPosts = AsyncHandler(async (req, res) => {
   //   });
   // }
 
-  const posts_map = {
-    titulo: req.body.titulo,
-    texto: req.body.texto,
-    data: req.body.data,
-    usuario: req.body.usuario,
-    tema: req.body.tema,
-  };
+  try {
+    const existingUser = await User.findOne({
+      where: {
+        id: req.body.usuario,
+      },
+    });
 
-  const posts = await Posts.create(posts_map);
+    if (!existingUser) {
+      return res.status(400).json({
+        description: "Usuário não encontrado",
+      });
+    }
 
-  res.status(200).json({
-    description: "Successfully saved post data!",
-  });
+    const posts_map = {
+      titulo: req.body.titulo,
+      texto: req.body.texto,
+      data: req.body.data,
+      usuario: req.body.usuario,
+      tema: req.body.tema,
+    };
+
+    const post = await Posts.create(posts_map);
+    post.usuario = existingUser.id;
+    await post.save();
+
+    res.status(200).json({
+      description: "Successfully saved post data!",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      description: "Erro interno do servidor",
+    });
+  }
 });
 
 const updatePosts = AsyncHandler(async (req, res) => {
