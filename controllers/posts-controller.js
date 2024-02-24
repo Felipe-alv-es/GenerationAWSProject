@@ -1,6 +1,7 @@
 const AsyncHandler = require("express-async-handler");
 const Posts = require("../model/posts");
 const User = require("../model/users");
+const Theme = require("../model/themes");
 
 const findAllPosts = AsyncHandler(async (req, res) => {
   const Posts = await Posts.findAll();
@@ -44,6 +45,18 @@ const createPosts = AsyncHandler(async (req, res) => {
       });
     }
 
+    const existingTheme = await Theme.findOne({
+      where: {
+        id: req.body.tema,
+      },
+    });
+
+    if (!existingTheme) {
+      return res.status(400).json({
+        description: "Tema não encontrado",
+      });
+    }
+
     const posts_map = {
       titulo: req.body.titulo,
       texto: req.body.texto,
@@ -54,6 +67,7 @@ const createPosts = AsyncHandler(async (req, res) => {
 
     const post = await Posts.create(posts_map);
     post.usuario = existingUser.id;
+    post.tema = existingTheme.id;
     await post.save();
 
     res.status(200).json({
