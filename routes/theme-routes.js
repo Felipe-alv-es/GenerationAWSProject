@@ -19,10 +19,6 @@ const {
  *            type: string
  *            description: Informe a descricao
  *            example: descrição de exemplo
- *          postagem:
- *            type: string
- *            description: Informe a postagem
- *            example: 10/10/2010
  */
 
 /**
@@ -79,17 +75,6 @@ routes.get("/", findAllThemes);
  *                  description:
  *                    type: string
  *                    example: Dados buscados com sucesso
- *                  data:
- *                    type: object
- *                    properties:
- *                      descricao:
- *                        type: string
- *                        description: Informe a descricao
- *                        example: Descrição de exemplo
- *                      postagem:
- *                        type: string
- *                        description: Informe a postagem
- *                        example: 10/10/2010
  *
  */
 routes.get("/:id", findtThemeById);
@@ -113,13 +98,9 @@ routes.get("/:id", findtThemeById);
  *                  type: string
  *                  description: Informe a descricao
  *                  example: descrição de exemplo
- *                postagem:
- *                  type: string
- *                  description: Informe a postagem
- *                  example: 10/10/2010
  *      responses:
  *        200:
- *          description: Successfully created data
+ *          description: Dados criados com sucesso
  *          content:
  *            application/json:
  *              schema:
@@ -127,7 +108,7 @@ routes.get("/:id", findtThemeById);
  *                properties:
  *                  description:
  *                    type: string
- *                    example: Successfully created data!
+ *                    example: Dados criados com sucesso
  *
  */
 routes.post("/", createTheme);
@@ -191,13 +172,9 @@ routes.delete("/:id", removeTheme);
  *                  type: string
  *                  description: Informe a descricao
  *                  example: Descrição de exemplo
- *                postagem:
- *                  type: string
- *                  description: Informe a postagem
- *                  example: 10/10/2010
  *      responses:
  *        200:
- *          description: Successfully updated data
+ *          description: Dados atualizados com sucesso
  *          content:
  *            application/json:
  *              schema:
@@ -205,7 +182,7 @@ routes.delete("/:id", removeTheme);
  *                properties:
  *                  description:
  *                    type: string
- *                    example: Successfully updated data!
+ *                    example: Dados atualizados com sucesso
  *
  *
  */

@@ -29,8 +29,8 @@ const {
  *            example: placeholderValue
  *          postagem:
  *            type: string
- *            description: Informe a postagem
- *            example: 10/10/2010
+ *            description: Informe o ID da postagem
+ *            example: 1
  */
 
 /**
@@ -72,13 +72,13 @@ routes.get("/", findAllPosts);
  *        - name: id
  *          in: path
  *          required: true
- *          description: id do post
+ *          description: ID do post
  *          schema:
  *            type: integer
  *            format: int64
  *      responses:
  *        200:
- *          description: dados do post
+ *          description: Ação realizada com sucesso
  *          content:
  *            application/json:
  *              schema:
@@ -86,27 +86,7 @@ routes.get("/", findAllPosts);
  *                properties:
  *                  description:
  *                    type: string
- *                    example: Dados buscados com sucesso
- *                  data:
- *                    type: object
- *                    properties:
- *                      nome:
- *                        type: string
- *                        description: Informe o nome
- *                        example: felipe
- *                      email:
- *                        type: string
- *                        description: Informe o Email
- *                        example: felipealves@gmail.com
- *                      foto:
- *                        type: string
- *                        description: Insira sua foto (Opcional)
- *                        example: placeholderValue
- *                      postagem:
- *                        type: string
- *                        description: Informe a postagem
- *                        example: 10/10/2010
- *
+ *                    example: Ação realizada com sucesso
  */
 routes.get("/:id", findPostById);
 
@@ -128,22 +108,22 @@ routes.get("/:id", findPostById);
  *                titulo:
  *                  type: string
  *                  description: Informe o Titulo
- *                  example: Titulo generico ponto png
+ *                  example: Titulo de exemplo
  *                texto:
  *                  type: string
  *                  description: Informe o Texto
- *                  example: texto generico ponto jpg
+ *                  example: Texto de exemplo
  *                usuario:
  *                  type: string
- *                  description: Insira o usuário
- *                  example: Fulano
+ *                  description: Insira o ID do usuário a ser vinculado
+ *                  example: 1
  *                tema:
  *                  type: string
- *                  description: Informe o tema
- *                  example: 10/10/2010
+ *                  description: Informe o ID do tema a ser vinculado
+ *                  example: 1
  *      responses:
  *        200:
- *          description: Successfully created data
+ *          description: Dados criados com sucesso
  *          content:
  *            application/json:
  *              schema:
@@ -151,7 +131,7 @@ routes.get("/:id", findPostById);
  *                properties:
  *                  description:
  *                    type: string
- *                    example: Successfully created data!
+ *                    example: Dados criados com sucesso
  *
  */
 routes.post("/", createPosts);
@@ -214,22 +194,22 @@ routes.delete("/:id", removePosts);
  *                titulo:
  *                  type: string
  *                  description: Informe o Titulo
- *                  example: Titulo generico ponto png
+ *                  example: Titulo exemplo
  *                texto:
  *                  type: string
  *                  description: Informe o Texto
- *                  example: texto generico ponto jpg
+ *                  example: Texto exemplo
  *                usuario:
  *                  type: string
- *                  description: Insira o usuário
- *                  example: Fulano
+ *                  description: Insira o ID do usuário
+ *                  example: 1
  *                tema:
  *                  type: string
- *                  description: Informe o tema
- *                  example: 10/10/2010
+ *                  description: Informe o ID do tema
+ *                  example: 1
  *      responses:
  *        200:
- *          description: Successfully updated data
+ *          description: Dados atualizados com sucesso
  *          content:
  *            application/json:
  *              schema:
@@ -237,7 +217,7 @@ routes.delete("/:id", removePosts);
  *                properties:
  *                  description:
  *                    type: string
- *                    example: Successfully updated data!
+ *                    example: Dados atualizados com sucesso
  *
  *
  */

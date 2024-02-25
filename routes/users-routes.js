@@ -29,8 +29,8 @@ const {
  *            example: placeholderValue
  *          postagem:
  *            type: string
- *            description: Informe a postagem
- *            example: 10/10/2010
+ *            description: Informe o ID da postagem
+ *            example: 1
  */
 
 /**
@@ -87,26 +87,6 @@ routes.get("/", findAllUsers);
  *                  description:
  *                    type: string
  *                    example: Dados buscados com sucesso
- *                  data:
- *                    type: object
- *                    properties:
- *                      nome:
- *                        type: string
- *                        description: Informe o nome
- *                        example: felipe
- *                      email:
- *                        type: string
- *                        description: Informe o Email
- *                        example: felipealves@gmail.com
- *                      foto:
- *                        type: string
- *                        description: Insira sua foto (Opcional)
- *                        example: placeholderValue
- *                      postagem:
- *                        type: string
- *                        description: Informe a postagem
- *                        example: 10/10/2010
- *
  */
 routes.get("/:id", findtUsersById);
 
@@ -137,13 +117,9 @@ routes.get("/:id", findtUsersById);
  *                  type: string
  *                  description: Insira sua foto (Opcional)
  *                  example: placeholderValue
- *                postagem:
- *                  type: string
- *                  description: Informe a postagem
- *                  example: 10/10/2010
  *      responses:
  *        200:
- *          description: Successfully created data
+ *          description: Dados criados com sucesso
  *          content:
  *            application/json:
  *              schema:
@@ -151,7 +127,7 @@ routes.get("/:id", findtUsersById);
  *                properties:
  *                  description:
  *                    type: string
- *                    example: Successfully created data!
+ *                    example: Dados criados com sucesso!
  *
  */
 routes.post("/", createUsers);
@@ -223,13 +199,9 @@ routes.delete("/:id", removeUsers);
  *                  type: string
  *                  description: Insira sua foto (Opcional)
  *                  example: placeholderValue
- *                postagem:
- *                  type: string
- *                  description: Informe a postagem
- *                  example: 10/10/2010
  *      responses:
  *        200:
- *          description: Successfully updated data
+ *          description: Dados alterados com sucesso
  *          content:
  *            application/json:
  *              schema:
@@ -237,7 +209,7 @@ routes.delete("/:id", removeUsers);
  *                properties:
  *                  description:
  *                    type: string
- *                    example: Successfully updated data!
+ *                    example: Dados alterados com sucesso!
  *
  *
  */

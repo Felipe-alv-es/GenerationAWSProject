@@ -5,7 +5,7 @@ const findAllUsers = AsyncHandler(async (req, res) => {
   const usersList = await Users.findAll();
 
   res.status(200).json({
-    description: "Dados salvos com sucesso",
+    description: "Dados buscados com sucesso",
     data: usersList,
   });
 });
@@ -46,7 +46,7 @@ const createUsers = AsyncHandler(async (req, res) => {
     const users = await Users.create(users_map);
 
     res.status(200).json({
-      description: "Dados salvos com sucesso",
+      description: "Usuário criado com sucesso",
     });
   } catch (error) {
     console.error(error);
@@ -62,7 +62,7 @@ const updateUsers = AsyncHandler(async (req, res) => {
   });
 
   res.status(200).json({
-    description: `Usuário alterado`,
+    description: "Usuário alterado com sucesso",
   });
 });
 
@@ -71,7 +71,7 @@ const removeUsers = AsyncHandler(async (req, res) => {
     where: { id: req.params.id },
   });
   res.status(200).json({
-    description: "Dados salvos com sucesso",
+    description: "Usuário removido com sucesso",
   });
 });
 

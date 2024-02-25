@@ -33,7 +33,7 @@ const createTheme = AsyncHandler(async (req, res) => {
   const theme = await Themes.create(theme_map);
 
   res.status(200).json({
-    description: "Dados salvos com sucesso",
+    description: "Tema criado com sucesso",
   });
 });
 
@@ -43,7 +43,7 @@ const updateTheme = AsyncHandler(async (req, res) => {
   });
 
   res.status(200).json({
-    description: "Tema Alterado",
+    description: "Tema Alterado com sucesso",
   });
 });
 
@@ -52,7 +52,7 @@ const removeTheme = AsyncHandler(async (req, res) => {
     where: { id: req.params.id },
   });
   res.status(200).json({
-    description: "Dados salvos com sucesso",
+    description: "Tema removido com sucesso",
   });
 });
 
