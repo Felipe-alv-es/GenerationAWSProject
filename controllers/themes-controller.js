@@ -5,7 +5,7 @@ const findAllThemes = AsyncHandler(async (req, res) => {
   const themesList = await Themes.findAll();
 
   res.status(200).json({
-    description: "Successfully fetched theme data!",
+    description: "Dados buscados com sucesso",
     data: themesList,
   });
 });
@@ -13,32 +13,27 @@ const findAllThemes = AsyncHandler(async (req, res) => {
 const findtThemeById = AsyncHandler(async (req, res) => {
   const theme = await Themes.findByPk(req.params.id);
   res.status(200).json({
-    description: `Successfully fetch by id: ${req.params.id} theme data!`,
+    description: `dados buscados pelo id: ${req.params.id} com sucesso`,
     data: theme,
   });
 });
 
 const createTheme = AsyncHandler(async (req, res) => {
-  //   if (!req.body.nome) {
-  //     res.status(400).json({
-  //       description: "O nome precisa estar preenchido",
-  //     });
-  //   }
-  //   if (!req.body.email) {
-  //     res.status(400).json({
-  //       description: "O Email precisa estar preenchida",
-  //     });
-  //   }
+  if (!req.body.descricao) {
+    res.status(400).json({
+      description: "A descrição precisa estar preenchida",
+    });
+    return;
+  }
 
   const theme_map = {
     descricao: req.body.descricao,
-    postagem: req.body.postagem,
   };
 
   const theme = await Themes.create(theme_map);
 
   res.status(200).json({
-    description: "Successfully saved theme data!",
+    description: "Dados salvos com sucesso",
   });
 });
 
@@ -48,7 +43,7 @@ const updateTheme = AsyncHandler(async (req, res) => {
   });
 
   res.status(200).json({
-    description: `Tema Alterado`,
+    description: "Tema Alterado",
   });
 });
 
@@ -57,7 +52,7 @@ const removeTheme = AsyncHandler(async (req, res) => {
     where: { id: req.params.id },
   });
   res.status(200).json({
-    description: `Successfully deleted theme data!`,
+    description: "Dados salvos com sucesso",
   });
 });
 
