@@ -7,7 +7,6 @@ const users = db.define(
     nome: Sequelize.STRING,
     email: Sequelize.STRING,
     foto: Sequelize.STRING,
-    postagem: Sequelize.INTEGER,
   },
   {
     tableName: "Usuario",

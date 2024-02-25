@@ -1,12 +1,11 @@
 const AsyncHandler = require("express-async-handler");
 const Users = require("../model/users");
-const Posts = require("../model/posts");
 
 const findAllUsers = AsyncHandler(async (req, res) => {
   const usersList = await Users.findAll();
 
   res.status(200).json({
-    description: "Successfully fetched users data!",
+    description: "Dados salvos com sucesso",
     data: usersList,
   });
 });
@@ -14,7 +13,7 @@ const findAllUsers = AsyncHandler(async (req, res) => {
 const findtUsersById = AsyncHandler(async (req, res) => {
   const user = await Users.findByPk(req.params.id);
   res.status(200).json({
-    description: `Successfully fetch by id: ${req.params.id} user data!`,
+    description: `dados buscados pelo id: ${req.params.id} com sucesso`,
     data: user,
   });
 });
@@ -27,13 +26,20 @@ const createUsers = AsyncHandler(async (req, res) => {
     return;
   }
 
-  Users.hasMany(Posts, { foreignKey: "usuario" });
+  const existingUser = await Users.findOne({
+    where: { email: req.body.email },
+  });
+  if (existingUser) {
+    res.status(400).json({
+      description: "Este e-mail já está cadastrado",
+    });
+    return;
+  }
 
   const users_map = {
     nome: req.body.nome,
     email: req.body.email,
     foto: req.body.foto,
-    postagem: req.body.postagem,
   };
 
   try {
@@ -56,7 +62,7 @@ const updateUsers = AsyncHandler(async (req, res) => {
   });
 
   res.status(200).json({
-    description: `Aluno alterado!`,
+    description: `Usuário alterado`,
   });
 });
 
@@ -65,7 +71,7 @@ const removeUsers = AsyncHandler(async (req, res) => {
     where: { id: req.params.id },
   });
   res.status(200).json({
-    description: `Successfully deleted user data!`,
+    description: "Dados salvos com sucesso",
   });
 });
 

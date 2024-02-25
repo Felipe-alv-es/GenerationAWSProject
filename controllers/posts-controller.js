@@ -7,7 +7,7 @@ const findAllPosts = AsyncHandler(async (req, res) => {
   const Posts = await Posts.findAll();
 
   res.status(200).json({
-    description: "Successfully fetched post data!",
+    description: "Dados buscados com sucesso",
     data: usersList,
   });
 });
@@ -15,22 +15,18 @@ const findAllPosts = AsyncHandler(async (req, res) => {
 const findPostById = AsyncHandler(async (req, res) => {
   const post = await Posts.findByPk(req.params.id);
   res.status(200).json({
-    description: `Successfully fetch by id: ${req.params.id} post data!`,
+    description: `dados buscados pelo id: ${req.params.id} com sucesso`,
     data: post,
   });
 });
 
 const createPosts = AsyncHandler(async (req, res) => {
-  // if (!req.body.nome) {
-  //   res.status(400).json({
-  //     description: "O nome precisa estar preenchido",
-  //   });
-  // }
-  // if (!req.body.email) {
-  //   res.status(400).json({
-  //     description: "O Email precisa estar preenchida",
-  //   });
-  // }
+  if (!req.body.titulo || !req.body.texto) {
+    res.status(400).json({
+      description: "O titulo e o texto precisam estar preenchidos",
+    });
+    return;
+  }
 
   try {
     const existingUser = await User.findOne({
@@ -71,7 +67,7 @@ const createPosts = AsyncHandler(async (req, res) => {
     await post.save();
 
     res.status(200).json({
-      description: "Successfully saved post data!",
+      description: "Dados buscados com sucesso",
     });
   } catch (error) {
     console.error(error);
@@ -87,7 +83,7 @@ const updatePosts = AsyncHandler(async (req, res) => {
   });
 
   res.status(200).json({
-    description: `Post alterado!`,
+    description: "Post alterado",
   });
 });
 
@@ -96,7 +92,7 @@ const removePosts = AsyncHandler(async (req, res) => {
     where: { id: req.params.id },
   });
   res.status(200).json({
-    description: `Successfully deleted post data!`,
+    description: "Dados buscados com sucesso",
   });
 });
 
