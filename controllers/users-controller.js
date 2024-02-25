@@ -1,5 +1,6 @@
 const AsyncHandler = require("express-async-handler");
 const Users = require("../model/users");
+const Posts = require("../model/posts");
 
 const findAllUsers = AsyncHandler(async (req, res) => {
   const usersList = await Users.findAll();
@@ -19,16 +20,14 @@ const findtUsersById = AsyncHandler(async (req, res) => {
 });
 
 const createUsers = AsyncHandler(async (req, res) => {
-  if (!req.body.nome) {
+  if (!req.body.nome || !req.body.email) {
     res.status(400).json({
-      description: "O nome precisa estar preenchido",
+      description: "O nome e o email precisam estar preenchidos",
     });
+    return;
   }
-  if (!req.body.email) {
-    res.status(400).json({
-      description: "O Email precisa estar preenchida",
-    });
-  }
+
+  Users.hasMany(Posts, { foreignKey: "usuario" });
 
   const users_map = {
     nome: req.body.nome,
@@ -37,11 +36,18 @@ const createUsers = AsyncHandler(async (req, res) => {
     postagem: req.body.postagem,
   };
 
-  const users = await Users.create(users_map);
+  try {
+    const users = await Users.create(users_map);
 
-  res.status(200).json({
-    description: "Successfully saved user data!",
-  });
+    res.status(200).json({
+      description: "Dados salvos com sucesso",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      description: "Erro interno do servidor",
+    });
+  }
 });
 
 const updateUsers = AsyncHandler(async (req, res) => {
