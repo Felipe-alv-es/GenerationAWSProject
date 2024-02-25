@@ -4,18 +4,18 @@ const User = require("../model/users");
 const Theme = require("../model/themes");
 
 const findAllPosts = AsyncHandler(async (req, res) => {
-  const Posts = await Posts.findAll();
+  const post = await Posts.findAll();
 
   res.status(200).json({
     description: "Dados buscados com sucesso",
-    data: usersList,
+    data: post,
   });
 });
 
 const findPostById = AsyncHandler(async (req, res) => {
   const post = await Posts.findByPk(req.params.id);
   res.status(200).json({
-    description: `dados buscados pelo id: ${req.params.id} com sucesso`,
+    description: `Dados buscados pelo id: ${req.params.id} com sucesso`,
     data: post,
   });
 });
@@ -67,7 +67,7 @@ const createPosts = AsyncHandler(async (req, res) => {
     await post.save();
 
     res.status(200).json({
-      description: "Dados buscados com sucesso",
+      description: "Post criado com sucesso",
     });
   } catch (error) {
     console.error(error);
@@ -83,7 +83,7 @@ const updatePosts = AsyncHandler(async (req, res) => {
   });
 
   res.status(200).json({
-    description: "Post alterado",
+    description: "Post alterado com sucesso",
   });
 });
 
@@ -92,7 +92,7 @@ const removePosts = AsyncHandler(async (req, res) => {
     where: { id: req.params.id },
   });
   res.status(200).json({
-    description: "Dados buscados com sucesso",
+    description: "Post removido com sucesso",
   });
 });
 
