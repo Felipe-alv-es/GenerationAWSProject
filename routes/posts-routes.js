@@ -15,21 +15,21 @@ const {
  *      Users:
  *        type: object
  *        properties:
- *          nome:
+ *          titulo:
  *            type: string
- *            description: Informe o nome
- *            example: felipe
- *          email:
+ *            description: Informe o Titulo
+ *            example: Titulo de exemplo
+ *          texto:
  *            type: string
- *            description: Informe o Email
- *            example: felipealves@gmail.com
- *          foto:
- *            type: string
- *            description: Insira sua foto (Opcional)
- *            example: placeholderValue
- *          postagem:
- *            type: string
- *            description: Informe o ID da postagem
+ *            description: Informe o Texto
+ *            example: Texto de exemplo
+ *          usuario_id:
+ *            type: integer
+ *            description: Informe o ID do usuário
+ *            example: 1
+ *          tema_id:
+ *            type: integer
+ *            description: Informe o ID do tema
  *            example: 1
  */
 
@@ -113,12 +113,12 @@ routes.get("/:id", findPostById);
  *                  type: string
  *                  description: Informe o Texto
  *                  example: Texto de exemplo
- *                usuario:
- *                  type: string
+ *                usuario_id:
+ *                  type: integer
  *                  description: Insira o ID do usuário a ser vinculado
  *                  example: 1
- *                tema:
- *                  type: string
+ *                tema_id:
+ *                  type: integer
  *                  description: Informe o ID do tema a ser vinculado
  *                  example: 1
  *      responses:
@@ -199,13 +199,13 @@ routes.delete("/:id", removePosts);
  *                  type: string
  *                  description: Informe o Texto
  *                  example: Texto exemplo
- *                usuario:
- *                  type: string
- *                  description: Insira o ID do usuário
+ *                usuario_id:
+ *                  type: integer
+ *                  description: Insira o ID do usuário a ser vinculado
  *                  example: 1
- *                tema:
- *                  type: string
- *                  description: Informe o ID do tema
+ *                tema_id:
+ *                  type: integer
+ *                  description: Informe o ID do tema a ser vinculado
  *                  example: 1
  *      responses:
  *        200:

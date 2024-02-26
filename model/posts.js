@@ -8,8 +8,8 @@ const posts = db.define(
   {
     titulo: Sequelize.STRING,
     texto: Sequelize.STRING,
-    usuario: Sequelize.INTEGER,
-    tema: Sequelize.INTEGER,
+    usuario_id: Sequelize.INTEGER,
+    tema_id: Sequelize.INTEGER,
   },
   {
     tableName: "Postagem",

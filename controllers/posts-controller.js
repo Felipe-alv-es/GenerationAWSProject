@@ -4,7 +4,12 @@ const User = require("../model/users");
 const Theme = require("../model/themes");
 
 const findAllPosts = AsyncHandler(async (req, res) => {
-  const post = await Posts.findAll();
+  const post = await Posts.findAll({
+    include: [
+      { model: User, as: "Usuario" },
+      { model: Theme, as: "Tema" },
+    ],
+  });
 
   res.status(200).json({
     description: "Dados buscados com sucesso",
@@ -31,7 +36,7 @@ const createPosts = AsyncHandler(async (req, res) => {
   try {
     const existingUser = await User.findOne({
       where: {
-        id: req.body.usuario,
+        id: req.body.usuario_id,
       },
     });
 
@@ -43,7 +48,7 @@ const createPosts = AsyncHandler(async (req, res) => {
 
     const existingTheme = await Theme.findOne({
       where: {
-        id: req.body.tema,
+        id: req.body.tema_id,
       },
     });
 
@@ -56,14 +61,13 @@ const createPosts = AsyncHandler(async (req, res) => {
     const posts_map = {
       titulo: req.body.titulo,
       texto: req.body.texto,
-      data: req.body.data,
-      usuario: req.body.usuario,
-      tema: req.body.tema,
+      usuario: req.body.usuario_id,
+      tema: req.body.tema_id,
     };
 
     const post = await Posts.create(posts_map);
-    post.usuario = existingUser.id;
-    post.tema = existingTheme.id;
+    post.usuario_id = existingUser.id;
+    post.tema_id = existingTheme.id;
     await post.save();
 
     res.status(200).json({
