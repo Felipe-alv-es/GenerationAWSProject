@@ -18,7 +18,13 @@ const findAllPosts = AsyncHandler(async (req, res) => {
 });
 
 const findPostById = AsyncHandler(async (req, res) => {
-  const post = await Posts.findByPk(req.params.id);
+  const post = await Posts.findByPk(req.params.id, {
+    include: [
+      { model: User, as: "Usuario" },
+      { model: Theme, as: "Tema" },
+    ],
+  });
+
   res.status(200).json({
     description: `Dados buscados pelo id: ${req.params.id} com sucesso`,
     data: post,

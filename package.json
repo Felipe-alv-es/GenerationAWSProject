@@ -4,7 +4,7 @@
   "description": "Node js Restful CRUD API",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "vercel-build": "echo hello",
     "dev": "set NODE_ENV=development&& nodemon server.js",
     "test": "set NODE_ENV=test&& mocha test/*.js --exit"
