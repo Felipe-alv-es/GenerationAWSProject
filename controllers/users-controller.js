@@ -1,8 +1,12 @@
 const AsyncHandler = require("express-async-handler");
 const Users = require("../model/users");
+const Posts = require("../model/posts");
 
+Users.hasMany(Posts, { foreignKey: "usuario", as: "Postagem" });
 const findAllUsers = AsyncHandler(async (req, res) => {
-  const usersList = await Users.findAll();
+  const usersList = await Users.findAll({
+    include: [{ model: Posts, as: "Postagem" }],
+  });
 
   res.status(200).json({
     description: "Dados buscados com sucesso",
@@ -11,7 +15,10 @@ const findAllUsers = AsyncHandler(async (req, res) => {
 });
 
 const findtUsersById = AsyncHandler(async (req, res) => {
-  const user = await Users.findByPk(req.params.id);
+  const user = await Users.findByPk(req.params.id, {
+    include: [{ model: Posts, as: "Postagem" }],
+  });
+
   res.status(200).json({
     description: `dados buscados pelo id: ${req.params.id} com sucesso`,
     data: user,

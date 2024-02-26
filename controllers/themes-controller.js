@@ -1,8 +1,12 @@
 const AsyncHandler = require("express-async-handler");
 const Themes = require("../model/themes");
+const Posts = require("../model/posts");
 
+Themes.hasMany(Posts, { foreignKey: "tema", as: "Postagem" });
 const findAllThemes = AsyncHandler(async (req, res) => {
-  const themesList = await Themes.findAll();
+  const themesList = await Themes.findAll({
+    include: [{ model: Posts, as: "Postagem" }],
+  });
 
   res.status(200).json({
     description: "Dados buscados com sucesso",
@@ -11,7 +15,10 @@ const findAllThemes = AsyncHandler(async (req, res) => {
 });
 
 const findtThemeById = AsyncHandler(async (req, res) => {
-  const theme = await Themes.findByPk(req.params.id);
+  const theme = await Themes.findByPk(req.params.id, {
+    include: [{ model: Posts, as: "Postagem" }],
+  });
+
   res.status(200).json({
     description: `dados buscados pelo id: ${req.params.id} com sucesso`,
     data: theme,
